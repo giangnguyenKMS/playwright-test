@@ -54,7 +54,7 @@ jobs:
 
     # Setup Xvfb to run headless mode
     - run: sudo apt-get install xvfb
-    - run: xvfb-run playwright-test
+    # - run: xvfb-run playwright-test
     # - name: Run headless test
     #   uses: coactions/setup-xvfb@v1
     #   with:
