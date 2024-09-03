@@ -21,9 +21,20 @@ on:
           - PROD      
 
 jobs:
-  test:
+  test_summary:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test Run Summary
+        run: |
+          echo "Actor: ${{ github.actor }}"
+          echo "Branch: ${{ github.ref }}"
+          echo "BDD Tags: @${{ github.event.inputs.TAG_NAME }}"
+          echo "Run ENV: ${{ github.event.inputs.ENV_NAME }}"
+
+  regression_test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    needs: test_summary
     steps:
     - uses: actions/checkout@v3
     
@@ -46,7 +57,7 @@ jobs:
       if: always()
       continue-on-error: true
       with:
-        ref: gh-pages
+        ref: allure-report
         path: gh-pages
 
     # Build Allure report
