@@ -55,11 +55,7 @@ jobs:
     # Setup Xvfb to run headless mode
     - run: sudo apt-get install xvfb
 
-    # - name: Start Xvfb
-    #   run: |
-    #     sudo Xvfb $DISPLAY -screen 0 1280x1024x24 > /dev/null 2>&1 &
-    #     echo "Xvfb started"
-
+    # Run test cases with X virtual framebuffer (Xvfb)
     - name: Run Playwright tests
       run: xvfb-run --auto-servernum --server-num=1 --server-args='-screen 0, 1920x1080x24' npx playwright test
 
@@ -69,15 +65,15 @@ jobs:
       if: always()
       continue-on-error: true
       with:
-        ref: ${{ github.ref }}
-        path: ${{ github.ref }}
+        ref: main
+        path: main
 
     # Build Allure report
     - name: Build test report
       uses: simple-elf/allure-report-action@v1.7
       if: always()
       with:
-        gh_pages: ${{ github.ref }}
+        gh_pages: main
         allure_history: allure-history
         allure_results: build/allure-results
 
@@ -87,7 +83,7 @@ jobs:
       if: always()
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: ${{ github.ref }}
+        publish_branch: main
         publish_dir: allure-history
   
     - uses: actions/upload-artifact@v3
