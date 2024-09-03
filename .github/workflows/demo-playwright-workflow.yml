@@ -93,4 +93,11 @@ jobs:
         path: playwright-report/
         retention-days: 30
 
+    - uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: allure-history
+        path: allure-history/
+        retention-days: 30
+
     
