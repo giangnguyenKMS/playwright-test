@@ -4,7 +4,7 @@ test("Dependencies setup", async ({ }) => {
   console.log("Making dependencies setup....");
 
   const browser: Browser = await chromium.launch({
-      headless: false,
+      headless: true,
   });    
   const context = await browser.newContext();
   const page: Page = await context.newPage();
