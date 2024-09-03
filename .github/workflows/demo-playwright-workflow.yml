@@ -66,7 +66,7 @@ jobs:
     #     run: npm test
 
     - name: Run Playwright tests
-      run: npx playwright test
+      run: xvfb-run playwright test
 
     # Load source code to get Allure results
     - name: Load test report history
