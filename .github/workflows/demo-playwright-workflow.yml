@@ -1,10 +1,10 @@
 name: 1. Demo Playwright workflow
 
 on:
-  push:
-    branches: '**'
-  pull_request:
-    branches: '**'
+  # push:
+  #   branches: '**'
+  # pull_request:
+  #   branches: '**'
   workflow_dispatch: 
     inputs:
       TAG_NAME:
