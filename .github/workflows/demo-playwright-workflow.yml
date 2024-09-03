@@ -27,7 +27,7 @@ jobs:
       - name: Test Run Summary
         run: |
           echo "Actor: ${{ github.actor }}"
-          echo "Branch: ${{ github.ref }}"
+          echo "Branch: ${{ github.ref_name }}"
           echo "Action_repository: ${{ github.action_repository }}"
           echo "repository_owner: ${{ github.repository_owner }}"
           echo "repository_id: ${{ github.repository_id }}"
@@ -65,15 +65,15 @@ jobs:
       if: always()
       continue-on-error: true
       with:
-        ref: main
-        path: main
+        ref: ${{ github.ref_name }}
+        path: ${{ github.ref_name }}
 
     # Build Allure report
     - name: Build test report
       uses: simple-elf/allure-report-action@v1.7
       if: always()
       with:
-        gh_pages: main
+        gh_pages: ${{ github.ref_name }}
         allure_history: allure-history
         allure_results: build/allure-results
 
@@ -83,7 +83,7 @@ jobs:
       if: always()
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: main
+        publish_branch: ${{ github.ref_name }}
         publish_dir: allure-history
   
     - uses: actions/upload-artifact@v3
