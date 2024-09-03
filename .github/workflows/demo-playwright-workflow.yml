@@ -28,6 +28,9 @@ jobs:
         run: |
           echo "Actor: ${{ github.actor }}"
           echo "Branch: ${{ github.ref }}"
+          echo "Action_repository: ${{ github.action_repository }}"
+          echo "repository_owner: ${{ github.repository_owner }}"
+          echo "repository_owner_id: ${{ github.repository_owner_id }}"
           echo "BDD Tags: @${{ github.event.inputs.TAG_NAME }}"
           echo "Run ENV: ${{ github.event.inputs.ENV_NAME }}"
 
