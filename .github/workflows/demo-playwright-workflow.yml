@@ -49,10 +49,11 @@ jobs:
       run: npx playwright install --with-deps
 
     # Setup Xvfb to run headless mode
-    - name: Run headless test
-      uses: coactions/setup-xvfb@v1
-      with:
-        run: npm test
+    - run: sudo apt-get install xvfb
+    # - name: Run headless test
+    #   uses: coactions/setup-xvfb@v1
+    #   with:
+    #     run: npm test
 
     - name: Run Playwright tests
       run: npx playwright test
@@ -81,7 +82,7 @@ jobs:
       if: always()
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: gh-pages
+        publish_branch: ${{ github.ref }}
         publish_dir: allure-history
   
     - uses: actions/upload-artifact@v3
